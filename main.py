@@ -1,6 +1,7 @@
 # Exercise 6
 from pathlib import Path
 from satpy import Scene, find_files_and_readers
+from pyresample.geometry import AreaDefinition
 
 exercise = Path("C:/Users/sa-br/Documents/edu/python/exercise-6-Bruenins/")
 input_dir  = exercise / "data"
@@ -9,7 +10,7 @@ input_dir.mkdir(parents = True, exist_ok = True)
 output_dir.mkdir(parents = True, exist_ok = True)
 
 # 1. Read the Scene that you downloaded from the data directory using SatPy. [2P]
-files = find_files_and_readers(base_dir="C:/Users/sa-br/Documents/edu/python/data", reader="seviri_l1b_nc")
+files = find_files_and_readers(base_dir=input_dir, reader="seviri_l1b_nc")
 scn = Scene(filenames=files)
 
 # 2. Load the composites "natural_color" and "convection" [2P]
@@ -22,11 +23,9 @@ scn.load(["natural_color", "convection"])
 #      - width and height of the resulting domain: 500px
 #      - projection x/y coordinates of lower left: -15E5
 #      - projection x/y coordinates of upper right: 15E5 
-from pyresample.geometry import AreaDefinition
-
-area_id = "Dem. Rep. Kongo"
-description = "Dem. Rep. Kongo in Lambert Azimuth Equal Area"
-proj_id = "Dem. Rep. Kongo"
+area_id = "D.R. Kongo"
+description = "Democratic Republic of Kongo in Lambert Azimuth Equal Area"
+proj_id = "D.R. Kongo"
 proj_dict = {"proj": "laea", "lat_0": -3, "lon_0": 23}
 
 width = 500
